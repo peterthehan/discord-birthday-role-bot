@@ -27,4 +27,6 @@ module.exports = client => {
       birthday.logMembers(roleType);
     }
   }
+
+  process.exit(0);
 };
