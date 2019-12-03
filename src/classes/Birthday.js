@@ -4,40 +4,36 @@ module.exports = class Birthday {
     this.role = role;
   }
 
-  _getMemberIds(members) {
+  getMemberIds(members) {
     return members.map(member => member.id);
   }
 
-  _getRemoveRoleMembers() {
-    const memberIds = this._getMemberIds(this.members);
+  getRemoveRoleMembers() {
+    const memberIds = this.getMemberIds(this.members);
     return this.role.members.filter(member => !memberIds.includes(member.id));
   }
 
-  _getAddRoleMembers() {
-    const memberIds = this._getMemberIds(this.role.members);
+  getAddRoleMembers() {
+    const memberIds = this.getMemberIds(this.role.members);
     return this.members.filter(member => !memberIds.includes(member.id));
   }
 
-  setRoles() {
-    this._getRemoveRoleMembers().forEach(member =>
-      member.roles.remove(this.role)
-    );
-    this._getAddRoleMembers().forEach(member => member.roles.add(this.role));
+  async setRoles() {
+    this.getRemoveRoleMembers().forEach(({ roles }) => roles.remove(this.role));
+    this.getAddRoleMembers().forEach(({ roles }) => roles.add(this.role));
   }
 
-  _getLogMembersString(members) {
+  getMembersLog(members) {
     return members.map(member => member.user.tag).join(', ');
   }
 
   logMembers(type) {
-    console.log(`set ${type}:`, this._getLogMembersString(this.members));
-    console.log(
-      `remove ${type}:`,
-      this._getLogMembersString(this._getRemoveRoleMembers())
-    );
-    console.log(
-      `add ${type}:`,
-      this._getLogMembersString(this._getAddRoleMembers())
-    );
+    const resultSet = `result: ${this.getMembersLog(this.members)}`;
+    const removeSet = `remove: ${this.getMembersLog(
+      this.getRemoveRoleMembers()
+    )}`;
+    const addSet = `add: ${this.getMembersLog(this.getAddRoleMembers())}`;
+
+    console.log(`${[type, resultSet, removeSet, addSet].join('\n')}\n`);
   }
 };

@@ -1,3 +1,4 @@
+const { name } = require('../../package');
 const { guildRoleMap } = require('../config');
 const Birthday = require('../classes/Birthday');
 const getBirthdayMembers = require('../util/getBirthdayMembers');
@@ -7,26 +8,27 @@ const roleTypeDateFunctionMap = {
   server: member => member.joinedAt
 };
 
-module.exports = client => {
-  console.log(`${client.user.tag}: Ready`);
+module.exports = async client => {
+  console.log(`${name}|${client.user.tag}: Ready`);
   for (const guildId of Object.keys(guildRoleMap)) {
     const guild = client.guilds.resolve(guildId);
     if (!guild) continue;
 
-    for (const roleType of Object.keys(roleTypeDateFunctionMap)) {
+    for (const roleType of Object.keys(guildRoleMap[guildId])) {
       const birthdayRole = guild.roles.resolve(guildRoleMap[guildId][roleType]);
       if (!birthdayRole) continue;
 
-      const birthdayMembers = getBirthdayMembers(
-        guild.members,
-        roleTypeDateFunctionMap[roleType]
-      );
+      const dateFunction = roleTypeDateFunctionMap[roleType];
+      const birthdayMembers = getBirthdayMembers(guild.members, dateFunction);
 
       const birthday = new Birthday(birthdayMembers, birthdayRole);
-      birthday.setRoles();
       birthday.logMembers(roleType);
+      await birthday.setRoles();
     }
   }
 
-  process.exit(0);
+  setTimeout(() => {
+    console.log(`${name}|${client.user.tag}: Exiting`);
+    process.exit(0);
+  }, 600000);
 };
