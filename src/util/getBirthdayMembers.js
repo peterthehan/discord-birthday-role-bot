@@ -8,7 +8,7 @@ const getDateRange = currentDate => {
   return [previousDate, currentDate, nextDate];
 };
 
-const toUTCMonthDate = date => `${date.getUTCMonth()}${date.getUTCDate()}`;
+const toUTCMonthDate = date => `${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
 
 module.exports = (members, getDateCallback) => {
   const currentDate = new Date();
