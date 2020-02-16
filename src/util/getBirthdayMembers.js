@@ -14,7 +14,7 @@ module.exports = (members, getDateCallback) => {
   const currentDate = new Date();
   const currentMonthDateRange = getDateRange(currentDate).map(toUTCMonthDate);
 
-  return members
+  return members.cache
     .filter(member => !member.user.bot)
     .filter(member => {
       const date = getDateCallback(member);
