@@ -8,6 +8,8 @@ A Discord bot that assigns members a birthday role based on their account creati
 
 > Follow the [Create Bot](https://github.com/peterthehan/create-discord-bot#create-bot) and [Get Bot](https://github.com/peterthehan/create-discord-bot#get-bot) sections. Remember to replace with the correct project name in step 1 of the [Get Bot](https://github.com/peterthehan/create-discord-bot#get-bot) section!
 
+> Don't forget to give your bot the `Manage Roles` permission!
+
 2. Open [src/config.js](https://github.com/peterthehan/discord-birthday-role-bot/blob/master/src/config.js) to configure your own settings:
 
 ```js
