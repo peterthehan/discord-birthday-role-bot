@@ -1,4 +1,3 @@
-const { name } = require('../../package');
 const { guildRoleMap } = require('../config');
 const Birthday = require('../classes/Birthday');
 const getBirthdayMembers = require('../util/getBirthdayMembers');
@@ -9,7 +8,7 @@ const roleTypeDateFunctionMap = {
 };
 
 module.exports = async client => {
-  console.log(`${name}|${client.user.tag}: Ready`);
+  console.log('birthdayRole: ready');
   for (const guildId of Object.keys(guildRoleMap)) {
     const guild = client.guilds.resolve(guildId);
     if (!guild) continue;
@@ -26,9 +25,4 @@ module.exports = async client => {
       await birthday.setRoles();
     }
   }
-
-  setTimeout(() => {
-    console.log(`${name}|${client.user.tag}: Exiting`);
-    process.exit(0);
-  }, 600000);
 };
