@@ -1,28 +1,23 @@
-const { guildRoleMap } = require('../config');
-const Birthday = require('../classes/Birthday');
-const getBirthdayMembers = require('../util/getBirthdayMembers');
+const { CronJob } = require("cron");
+const BirthdayRoleManager = require("../classes/BirthdayRoleManager");
+const rules = require("../config");
 
-const roleTypeDateFunctionMap = {
-  account: member => member.user.createdAt,
-  server: member => member.joinedAt
-};
+module.exports = async (client) => {
+  console.log("birthdayRole: ready");
 
-module.exports = async client => {
-  console.log('birthdayRole: ready');
-  for (const guildId of Object.keys(guildRoleMap)) {
-    const guild = client.guilds.resolve(guildId);
-    if (!guild) continue;
+  for (const rule of rules) {
+    const guild = client.guilds.resolve(rule.guildId);
 
-    for (const roleType of Object.keys(guildRoleMap[guildId])) {
-      const birthdayRole = guild.roles.resolve(guildRoleMap[guildId][roleType]);
-      if (!birthdayRole) continue;
-
-      const dateFunction = roleTypeDateFunctionMap[roleType];
-      const birthdayMembers = getBirthdayMembers(guild.members, dateFunction);
-
-      const birthday = new Birthday(birthdayMembers, birthdayRole);
-      birthday.logMembers(roleType);
-      await birthday.setRoles();
-    }
+    new CronJob(
+      rule.cronExpression,
+      () => {
+        const manager = new BirthdayRoleManager(guild, rule);
+        manager.setAccountBirthdayRoles();
+        manager.setServerBirthdayRoles();
+      },
+      null,
+      true,
+      rule.timezone
+    );
   }
 };

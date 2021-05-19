@@ -1,0 +1,11 @@
+[
+  {
+    "guildId": "258167954913361930",
+    "accountBirthdayRoleId": "606324811068735489",
+    "serverBirthdayRoleId": "606262166672113675",
+    "daysToLookBack": 1,
+    "daysToLookForward": 1,
+    "timezone": "America/Los_Angeles",
+    "cronExpression": "0 0 20 * * *"
+  }
+]

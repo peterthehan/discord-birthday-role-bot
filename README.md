@@ -12,24 +12,35 @@ A Discord bot that assigns members a birthday role based on their account creati
 
 2. Download this widget and move the `src-discord-birthday-role-bot` folder into the [src/widgets/](https://github.com/peterthehan/create-discord-bot/tree/master/app/src/widgets) folder created in step 1.
 
-3. Open [config.js](https://github.com/peterthehan/discord-birthday-role-bot/blob/master/config.js) to configure your own settings:
+3. Open [config.json](https://github.com/peterthehan/discord-birthday-role-bot/blob/master/config.json) to configure your own settings:
 
-   ```js
-   module.exports = {
-     guildRoleMap: {
-       "258167954913361930": {
-         account: "606324811068735489",
-         server: "606262166672113675",
-       },
-     },
-   };
+   ```json
+   [
+     {
+       "guildId": "258167954913361930",
+       "accountBirthdayRoleId": "606324811068735489",
+       "serverBirthdayRoleId": "606262166672113675",
+       "daysToLookBack": 1,
+       "daysToLookForward": 1,
+       "timezone": "America/Los_Angeles",
+       "cronExpression": "0 0 20 * * *"
+     }
+   ]
    ```
 
    Add as many rules as you want to configure for other servers.
 
-   - `guildRoleMap` is a key-value map between server id and role ids.
-     - `account` is the role id assigned for users with an account birthday.
-     - `server` is the role id assigned for users with a server birthday.
+   - `guildId` is your server id.
+   - `accountBirthdayRoleId` is the role id assigned to users with an account birthday.
+   - `serverBirthdayRoleId` is the role id assigned to members with a server birthday.
+   - Birthday roles are assigned if the birthday falls between the date range created by `daysToLookBack` and `daysToLookForward` using the current date (excludes "0th" birthdays).
+   - `timezone` is the timezone you wish to localize your `cronExpression` to.
+   - `cronExpression` is the interval at which the birthday checks are done.
+
+   Some useful tools:
+
+   - [Moment Timezone](https://momentjs.com/timezone): find your `timezone` string.
+   - [crontab guru](https://crontab.guru): build your `cronExpression`. Note that the tool does not support seconds but this bot configuration does.
 
 4. `npm start` to run the bot.
 
