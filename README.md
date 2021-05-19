@@ -12,6 +12,8 @@ A Discord bot that assigns members a birthday role based on their account creati
 
 2. Download this widget and move the `src-discord-birthday-role-bot` folder into the [src/widgets/](https://github.com/peterthehan/create-discord-bot/tree/master/app/src/widgets) folder created in step 1.
 
+   > npm i -s cron@^1.8.2 to install this widget's dependencies.
+
 3. Open [config.json](https://github.com/peterthehan/discord-birthday-role-bot/blob/master/config.json) to configure your own settings:
 
    ```json
