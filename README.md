@@ -10,11 +10,11 @@ A Discord bot that assigns members a birthday role based on their account creati
 
    > Don't forget to give your bot the `Manage Roles` permission!
 
-2. Download this widget and move the `src-discord-birthday-role-bot` folder into the [src/widgets/](https://github.com/peterthehan/create-discord-bot/tree/master/app/src/widgets) folder created in step 1.
+2. Download this bot and move the `src-discord-birthday-role-bot` folder into the [/src/bots](https://github.com/peterthehan/create-discord-bot/tree/master/src/bots) folder from step 1.
 
-   > npm i -s cron@^1.8.2 to install this widget's dependencies.
+   > Run `npm i -s cron@^1.8.2 @types/cron@^1.7.3` to install this widget's dependencies.
 
-3. Open [config.json](https://github.com/peterthehan/discord-birthday-role-bot/blob/master/src-discord-birthday-role-bot/config.json) to configure your own settings:
+3. Open [config.json](./src-discord-birthday-role-bot/config.json) to configure your own settings:
 
    ```json
    [
@@ -32,7 +32,7 @@ A Discord bot that assigns members a birthday role based on their account creati
 
    Add as many rules as you want to configure for other servers.
 
-   - `guildId` is your server id.
+   - `guildId` is the server id.
    - `accountBirthdayRoleId` is the role id assigned to users with an account birthday.
    - `serverBirthdayRoleId` is the role id assigned to members with a server birthday.
    - Birthday roles are assigned if the birthday falls between the date range created by `daysToLookBack` and `daysToLookForward` using the current date (excludes "0th" birthdays).
