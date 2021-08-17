@@ -2,7 +2,7 @@
 
 [![Discord](https://discord.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/WjEFnzC) [![Twitter Follow](https://img.shields.io/twitter/follow/peterthehan.svg?style=social)](https://twitter.com/peterthehan)
 
-A Discord bot that assigns members a birthday role based on their account creation date or server join date.
+A Discord bot that assigns members a birthday role based on their account creation date and server join date.
 
 ## Setup
 
